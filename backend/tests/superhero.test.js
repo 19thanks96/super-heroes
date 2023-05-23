@@ -12,6 +12,11 @@ const superman = {
 }
 const superheroes = [superman]
 describe('Superhero', () => {
+  test('create superhero', async () => {
+    const res = await request(app).post('/superheroes').send(superman)
+    expect(res.statusCode).toEqual(200)
+    expect(res.body).toHaveProperty('nickname')
+  })
   test('get /superheroes should return list of superheroes', async () => {
     const res = await request(app).get('/superheroes')
     expect(res.statusCode).toEqual(200)
