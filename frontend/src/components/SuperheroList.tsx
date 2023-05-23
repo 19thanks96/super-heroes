@@ -14,7 +14,7 @@ export const SuperheroList: React.FC<SuperheroListProps> = (props) => {
         return(
             <>
             <h1>You have no heroes created yet</h1>
-            <button>Add new hero</button></>
+            <button >Add new hero</button></>
         )
     }
     return (
