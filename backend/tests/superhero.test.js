@@ -12,7 +12,7 @@ const superman = {
 }
 const superheroes = [superman]
 describe('Superhero', () => {
-  test('create superhero', async () => {
+  test('create superhero returns 200', async () => {
     const res = await request(app).post('/superheroes').send(superman)
     expect(res.statusCode).toEqual(200)
     expect(res.body).toHaveProperty('nickname')

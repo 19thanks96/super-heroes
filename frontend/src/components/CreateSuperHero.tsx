@@ -16,7 +16,12 @@ export const CreateSuperHero: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor='nickname'>Nickname</label>
                     <input name='nickname' id='nickname' type="text" />
-                
+                    <label htmlFor='realname'>Realname</label>
+                    <input name='realname' id='realname' type="text" />
+                    <label htmlFor='origin_description'>Origin description</label>
+                    <input name='origin_description' id='origin_description' type="text" />
+                    <label htmlFor='catch_phrase'>Catch phrase</label>
+                    <input name='catch_phrase' id='catch_phrase' type="text" />
                 <input type="submit" value='submit' />
             </form>
         </>

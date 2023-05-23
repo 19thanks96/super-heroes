@@ -30,16 +30,39 @@ test('renders  "submit" button', () => {
     expect(superheroElement).toBeInTheDocument()
 })
 
-test('create "superhero "', () => {
+test('create "superhero"', () => {
     const user = userEvent.setup()
     renderWithRouter(<CreateSuperHero />)
-    const nicknameInput = screen.getByLabelText('nickname', { exact: false })
+
+    const nicknameInput = screen.getByLabelText('nickname', { exact: false }) as HTMLInputElement
+    expect(nicknameInput).toBeInTheDocument()
     fireEvent.change(nicknameInput, {
-        target: { value: 'dickman' },
+        target: { value: 'superman' },
     })
+    expect(nicknameInput.value).toEqual('superman')
+    
+    const realNameInput = screen.getByLabelText('realname', { exact: false }) as HTMLInputElement
+    expect(realNameInput).toBeInTheDocument()
+    fireEvent.change(realNameInput, {
+        target: { value: 'Clark Kent' },
+    })
+    expect(realNameInput.value).toEqual('Clark Kent')
+
+    const originDescriptionInput = screen.getByLabelText('origin description', { exact: false }) as HTMLInputElement
+    expect(originDescriptionInput).toBeInTheDocument()
+    fireEvent.change(originDescriptionInput, {
+        target: { value: 'he was born Kal-El on the planet Krypton' },
+    })
+    expect(originDescriptionInput.value).toEqual('he was born Kal-El on the planet Krypton')
+
+    const catchPhraseInput = screen.getByLabelText('catch phrase', { exact: false }) as HTMLInputElement
+    expect(catchPhraseInput).toBeInTheDocument()
+    fireEvent.change(catchPhraseInput, {
+        target: { value: "Look, up in the sky, it's a bird, it's a plane, it's Superman!" },
+    })
+    expect(catchPhraseInput.value).toEqual("Look, up in the sky, it's a bird, it's a plane, it's Superman!")
     const superheroElement = screen.getByRole('button', {
         name: /submit/i,
     })
-    expect(nicknameInput).toBeInTheDocument()
     expect(superheroElement).toBeInTheDocument()
 })
