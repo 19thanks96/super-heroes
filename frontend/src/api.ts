@@ -14,3 +14,9 @@ export async function createHero(hero: SuperHero) {
     const responseJson = await response.json()
     return responseJson
 }
+
+export async function fetchSuperHeroes() {
+    const response = await fetch(url + '/superheroes')
+    const responseJson = await response.json()
+    return responseJson
+}
