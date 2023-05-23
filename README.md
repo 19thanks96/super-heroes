@@ -36,6 +36,7 @@ you made (if any)
 > - Jest + supertest
 > - React Router
 > - Prettier
+> - Nodemon
 
 ## Live Demo
 

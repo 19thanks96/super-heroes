@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom"
-
+import { SuperHero } from "../types"
 export type SuperheroListProps = {
     superheroes: Array<SuperHero>
-}
-
-export type SuperHero = {
-    nickname: string
-    real_name: string
-    origin_description: string
-    catch_phrase: string
 }
 
 export const SuperheroList: React.FC<SuperheroListProps> = (props) => {

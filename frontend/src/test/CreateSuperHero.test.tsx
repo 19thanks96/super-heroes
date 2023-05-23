@@ -30,7 +30,7 @@ test('renders  "submit" button', () => {
     expect(superheroElement).toBeInTheDocument()
 })
 
-test('create "superhero"', () => {
+test('create "superhero"', async () => {
     const user = userEvent.setup()
     renderWithRouter(<CreateSuperHero />)
 
@@ -61,8 +61,12 @@ test('create "superhero"', () => {
         target: { value: "Look, up in the sky, it's a bird, it's a plane, it's Superman!" },
     })
     expect(catchPhraseInput.value).toEqual("Look, up in the sky, it's a bird, it's a plane, it's Superman!")
-    const superheroElement = screen.getByRole('button', {
+    
+    const superheroSubmitButton = screen.getByRole('button', {
         name: /submit/i,
     })
-    expect(superheroElement).toBeInTheDocument()
+    expect(superheroSubmitButton).toBeInTheDocument()
+    await user.click(superheroSubmitButton)
+    expect(window.location.pathname).toEqual('/')
+
 })
