@@ -39,3 +39,4 @@ test('renders `add new hero` button when no heroes pass', async () => {
     await user.click(superheroElement)
     expect(window.location.pathname).toEqual('/createhero')
 })
+
