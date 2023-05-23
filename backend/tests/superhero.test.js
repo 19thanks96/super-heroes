@@ -20,6 +20,6 @@ describe('Superhero', () => {
   test('get /superheroes should return list of superheroes', async () => {
     const res = await request(app).get('/superheroes')
     expect(res.statusCode).toEqual(200)
-    expect(res.body).toBe(superheroes)
+    expect(res.body).toEqual(superheroes)
   })
 })

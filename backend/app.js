@@ -13,6 +13,9 @@ app.post('/superheroes', (req, res) => {
     superheroes.push(req.body) 
     res.json(req.body)
 })
+app.get('/superheroes', (req, res) => {
+    res.json(superheroes)
+})
 
 if (process.env.NODE_ENV !== 'test') {
     app.listen(port, () => console.log(`Listening on port ${port}`))
