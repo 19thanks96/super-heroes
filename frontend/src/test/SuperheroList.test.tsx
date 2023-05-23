@@ -10,6 +10,8 @@ test('renders  "you have no heroes created yet" when no heroes pass', () => {
 
 test('renders `add new hero` button when no heroes pass', () => {
   render(<SuperheroList superheroes={[]} /> );
-  const superheroElement = screen.getByText(/add new hero/i);
+  const superheroElement = screen.getByRole('button', {
+    name: /add new hero/i
+  })
   expect(superheroElement).toBeInTheDocument();
 });
