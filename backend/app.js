@@ -9,11 +9,6 @@ app.use(bodyParser.json())
 
 const superheroes = []
 
-app.get('/', (req, res) => {
-  console.log('zapros')
-  res.json('Hello World!')
-})
-
 app.post('/superheroes', (req, res) => {
     superheroes.push(req.body) 
     res.json(req.body)
@@ -22,7 +17,5 @@ app.post('/superheroes', (req, res) => {
 if (process.env.NODE_ENV !== 'test') {
     app.listen(port, () => console.log(`Listening on port ${port}`))
 }
-
-
 
 module.exports = app
