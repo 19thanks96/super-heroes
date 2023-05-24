@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { createHero } from '../api'
 import { SuperHeroDTO } from '../types'
+import { useNavigate } from 'react-router-dom'
 
 export const CreateSuperHero: React.FC = () => {
     const [nickname, setNickname] = useState<string>('')
@@ -8,6 +9,7 @@ export const CreateSuperHero: React.FC = () => {
     const [origin_description, setOrigin_description] = useState<string>('')
     const [catch_phrase, setCatch_phrase] = useState<string>('')
     const [images, setImages] = useState<SuperHeroDTO['images']>(null)
+    const navigate = useNavigate();
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -19,9 +21,12 @@ export const CreateSuperHero: React.FC = () => {
                 catch_phrase,
                 images,
             })
+            navigate("/");
         } catch (error) {
             console.log(console.error(error))
+            return
         }
+        
     }
 
     return (

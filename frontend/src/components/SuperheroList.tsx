@@ -3,31 +3,40 @@ import React, { useEffect } from 'react'
 import { SuperHero } from '../types'
 import { fetchSuperHeroes, url } from '../api'
 import './components.css'
+import { useNavigate } from 'react-router-dom'
 export type SuperheroListProps = {
     superheroes: Array<SuperHero>
 }
 
+
 export const SuperheroList: React.FC<SuperheroListProps> = (props) => {
-    const superHeroElements = props.superheroes.map((e, index) => {
+    const navigate = useNavigate()
+    function showHero(hero:SuperHero) {
+        navigate("/hero/" + hero.nickname);
+    }
+    const superHeroElements = props.superheroes.map((hero, index) => {
         return (
-            <div className="hero" key={e.nickname + index}>
+            
+            <div className="hero" key={hero.nickname + index} onClick={() => {
+                showHero(hero)
+            }}>
                 <div className="nickname">
-                    <h2>{e.nickname.toLocaleUpperCase()}</h2>
+                    <h2>{hero.nickname.toLocaleUpperCase()}</h2>
                 </div>
                 <div className="realname">
                     <p>Realname: </p>
-                    <p>{e.real_name}</p>
+                    <p>{hero.real_name}</p>
                 </div>
                 <div className="description">
                     <p>Description: </p>
-                    <p>{e.origin_description}</p>
+                    <p>{hero.origin_description}</p>
                 </div>
                 <div className="phrase">
                     <p>Catch Phrase: </p>
-                    <p>{e.catch_phrase}</p>
+                    <p>{hero.catch_phrase}</p>
                 </div>
                 <div className="img">
-                    <img src={url + '/' + e.images[0]} />
+                    <img src={url + '/' + hero.images[0]} />
                 </div>
             </div>
         )
