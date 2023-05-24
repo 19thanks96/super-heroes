@@ -26,7 +26,7 @@ export const CreateSuperHero: React.FC = () => {
 
     return (
         <>
-            <h1>Create your Superhero</h1>
+            <h1 className='creatingHero'>Create your Superhero</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="nickname">Nickname</label>
                 <input
@@ -72,7 +72,7 @@ export const CreateSuperHero: React.FC = () => {
                     }}
                 />
 
-                <label htmlFor="img">Catch phrase</label>
+                <label htmlFor="img">Add your Image</label>
                 <input
                     name="images"
                     id="images"
@@ -82,7 +82,7 @@ export const CreateSuperHero: React.FC = () => {
                     }}
                 />
                 <button type="button">button</button>
-                <input type="submit" value="submit" />
+                <input type="submit" id='submit' value="submit" />
             </form>
         </>
     )

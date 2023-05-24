@@ -1,9 +1,10 @@
 import { Outlet, Link } from 'react-router-dom'
+import './components.css'
 
 const Layout = () => {
     return (
         <>
-            <Link to="/">SuperheroList</Link>
+            <Link className='herolist' to="/">SuperheroList</Link>
             <Outlet />
         </>
     )
