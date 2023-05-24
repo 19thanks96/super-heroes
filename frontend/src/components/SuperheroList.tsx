@@ -23,18 +23,7 @@ export const SuperheroList: React.FC<SuperheroListProps> = (props) => {
                 <div className="nickname">
                     <h2>{hero.nickname.toLocaleUpperCase()}</h2>
                 </div>
-                <div className="realname">
-                    <p>Realname: </p>
-                    <p>{hero.real_name}</p>
-                </div>
-                <div className="description">
-                    <p>Description: </p>
-                    <p>{hero.origin_description}</p>
-                </div>
-                <div className="phrase">
-                    <p>Catch Phrase: </p>
-                    <p>{hero.catch_phrase}</p>
-                </div>
+                
                 <div className="img">
                     <img src={url + '/' + hero.images[0]} />
                 </div>

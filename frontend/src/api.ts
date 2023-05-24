@@ -25,3 +25,9 @@ export async function fetchSuperHeroes() {
     const responseJson = await response.json()
     return responseJson
 }
+
+export async function fetchHero(nickname?:string) {
+    const response = await fetch(url + '/superheroes/' + nickname)
+    const responseJson = await response.json()
+    return responseJson
+}

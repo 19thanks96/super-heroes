@@ -51,5 +51,16 @@ app.get('/superheroes', (req, res) => {
 if (process.env.NODE_ENV !== 'test') {
     app.listen(port, () => console.log(`Listening on port ${port}`))
 }
+app.get('/superheroes/:nickname', (req, res) => {
+    console.log(req.params.nickname, 'req.params.nickname')
+    const hero = superheroes.find((e) => {
+        console.log(e.nickname)
+        return e.nickname === req.params.nickname
+    })
+    console.log(superheroes)
+    console.log(hero, 'hero')
 
+    res.json(hero)
+})
+//searchhero
 module.exports = app
