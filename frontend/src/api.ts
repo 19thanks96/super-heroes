@@ -1,19 +1,19 @@
 import { stringify } from 'querystring'
-import { SuperHero } from './types'
+import { SuperHeroDTO } from './types'
 
-const url = 'http://localhost:4000'
-export async function createHero(hero: SuperHero) {
+export const url = 'http://localhost:4000'
+export async function createHero(hero: SuperHeroDTO) {
     const data = new FormData()
     //@ts-ignore
     data.append('file', hero.images[0])
+    data.append('nickname', hero.nickname)
+    data.append('real_name', hero.real_name)
+    data.append('origin_description', hero.origin_description)
+    data.append('catch_phrase', hero.catch_phrase)
     //@ts-ignore
     console.log(hero.images[0])
     const response = await fetch(url + '/superheroes', {
         method: 'post',
-        //headers: {
-        //    Accept: 'application/json',
-        //    'Content-Type': 'application/json',
-        //},
         body: data,
     })
     const responseJson = await response.json()

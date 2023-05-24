@@ -6,8 +6,7 @@ import { SuperheroList } from './components/SuperheroList'
 import Layout from './components/Layout'
 import { CreateSuperHero } from './components/CreateSuperHero'
 import { fetchSuperHeroes } from './api'
-import { SuperHero, SuperHeroArray } from './types'
-
+import { SuperHeroDTO, SuperHeroArray } from './types'
 
 function App() {
     const [superheroes, setSuperheroes] = useState<SuperHeroArray>([])
@@ -21,7 +20,10 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<SuperheroList superheroes={superheroes} />} />
+                    <Route
+                        index
+                        element={<SuperheroList superheroes={superheroes} />}
+                    />
                     <Route path="createhero" element={<CreateSuperHero />} />
                 </Route>
             </Routes>

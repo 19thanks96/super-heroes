@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { createHero } from '../api'
-import { SuperHero } from '../types'
+import { SuperHeroDTO } from '../types'
 
 export const CreateSuperHero: React.FC = () => {
     const [nickname, setNickname] = useState<string>('')
     const [real_name, setReal_name] = useState<string>('')
     const [origin_description, setOrigin_description] = useState<string>('')
     const [catch_phrase, setCatch_phrase] = useState<string>('')
-    const [images, setImages] = useState<SuperHero['images']>(null)
-
+    const [images, setImages] = useState<SuperHeroDTO['images']>(null)
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -18,7 +17,7 @@ export const CreateSuperHero: React.FC = () => {
                 real_name,
                 origin_description,
                 catch_phrase,
-                images
+                images,
             })
         } catch (error) {
             console.log(console.error(error))
@@ -78,11 +77,11 @@ export const CreateSuperHero: React.FC = () => {
                     name="images"
                     id="images"
                     type="file"
-                    //multiple
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setImages(event.currentTarget.files)
                     }}
                 />
+                <button type="button">button</button>
                 <input type="submit" value="submit" />
             </form>
         </>

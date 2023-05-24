@@ -7,6 +7,8 @@ const path = require('path')
 const app = express()
 const port = 4000
 
+app.use(express.static('uploads'))
+
 app.use(cors())
 app.use(bodyParser.json())
 const storage = multer.diskStorage({
@@ -30,8 +32,17 @@ const superheroes = []
 app.post('/superheroes', upload.single('file'), uploadFiles)
 
 function uploadFiles(req, res) {
+    console.log(req.body)
     console.log(req.file)
-    res.json({ message: 'Successfully uploaded files' })
+    const superHero = {
+        nickname: req.body.nickname,
+        real_name: req.body.real_name,
+        origin_description: req.body.origin_description,
+        catch_phrase: req.body.catch_phrase,
+        images:[ req.file.filename.replace(/\\/g, "/")],
+    }
+    superheroes.push(superHero)
+    res.json(superHero)
 }
 app.get('/superheroes', (req, res) => {
     res.json(superheroes)
