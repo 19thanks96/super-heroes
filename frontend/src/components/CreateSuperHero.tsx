@@ -2,14 +2,18 @@ import React, { useState } from 'react'
 import { createHero } from '../api'
 import { SuperHeroDTO } from '../types'
 import { useNavigate } from 'react-router-dom'
+import { SuperHero } from '../types'
+export type SuperheroFromProps = {
+    superheroes?: SuperHero
+}
 
-export const CreateSuperHero: React.FC = () => {
-    const [nickname, setNickname] = useState<string>('')
-    const [real_name, setReal_name] = useState<string>('')
-    const [origin_description, setOrigin_description] = useState<string>('')
-    const [catch_phrase, setCatch_phrase] = useState<string>('')
+export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
+    const [nickname, setNickname] = useState<string>(props?.superheroes?.nickname || '')
+    const [real_name, setReal_name] = useState<string>(props?.superheroes?.real_name || '')
+    const [origin_description, setOrigin_description] = useState<string>(props?.superheroes?.origin_description || '')
+    const [catch_phrase, setCatch_phrase] = useState<string>(props?.superheroes?.catch_phrase || '')
     const [images, setImages] = useState<SuperHeroDTO['images']>(null)
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -21,17 +25,16 @@ export const CreateSuperHero: React.FC = () => {
                 catch_phrase,
                 images,
             })
-            navigate("/");
+            navigate('/')
         } catch (error) {
             console.log(console.error(error))
             return
         }
-        
     }
 
     return (
         <>
-            <h1 className='creatingHero'>Create your Superhero</h1>
+            <h1 className="creatingHero">Create your Superhero</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="nickname">Nickname</label>
                 <input
@@ -87,7 +90,7 @@ export const CreateSuperHero: React.FC = () => {
                     }}
                 />
                 <button type="button">button</button>
-                <input type="submit" id='submit' value="submit" />
+                <input type="submit" id="submit" value="submit" />
             </form>
         </>
     )
