@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { createHero } from '../api'
+import { SuperHero } from '../types'
 
 export const CreateSuperHero: React.FC = () => {
     const [nickname, setNickname] = useState<string>('')
     const [real_name, setReal_name] = useState<string>('')
     const [origin_description, setOrigin_description] = useState<string>('')
     const [catch_phrase, setCatch_phrase] = useState<string>('')
+    const [images, setImages] = useState<SuperHero['images']>(null)
+
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -15,6 +18,7 @@ export const CreateSuperHero: React.FC = () => {
                 real_name,
                 origin_description,
                 catch_phrase,
+                images
             })
         } catch (error) {
             console.log(console.error(error))
@@ -66,6 +70,16 @@ export const CreateSuperHero: React.FC = () => {
                     value={catch_phrase}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setCatch_phrase(event?.target.value)
+                    }}
+                />
+
+                <label htmlFor="img">Catch phrase</label>
+                <input
+                    name="images"
+                    id="images"
+                    type="file"
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setImages(event.currentTarget.files)
                     }}
                 />
                 <input type="submit" value="submit" />
