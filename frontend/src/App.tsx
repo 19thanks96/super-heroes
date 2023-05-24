@@ -5,24 +5,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { SuperheroList } from './components/SuperheroList'
 import Layout from './components/Layout'
 import { CreateSuperHero } from './components/CreateSuperHero'
-import { fetchSuperHeroes } from './api'
-import { SuperHeroDTO, SuperHeroArray } from './types'
+import { MainPage } from './components/MainPage'
+
 
 function App() {
-    const [superheroes, setSuperheroes] = useState<SuperHeroArray>([])
-    useEffect(() => {
-        superHeroEffect()
-    }, [])
-    async function superHeroEffect() {
-        setSuperheroes(await fetchSuperHeroes())
-    }
+    
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route
                         index
-                        element={<SuperheroList superheroes={superheroes} />}
+                        element={<MainPage />}
                     />
                     <Route path="createhero" element={<CreateSuperHero />} />
                 </Route>
