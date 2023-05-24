@@ -78,6 +78,7 @@ export const CreateSuperHero: React.FC = () => {
                     name="images"
                     id="images"
                     type="file"
+                    //multiple
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setImages(event.currentTarget.files)
                     }}
