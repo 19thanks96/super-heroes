@@ -4,6 +4,7 @@ var bodyParser = require('body-parser')
 var cors = require('cors')
 const fs = require('fs')
 const path = require('path')
+const database = require('./db')
 const app = express()
 const port = 4000
 
@@ -62,5 +63,7 @@ app.get('/superheroes/:nickname', (req, res) => {
 
     res.json(hero)
 })
+
+
 //searchhero
 module.exports = app

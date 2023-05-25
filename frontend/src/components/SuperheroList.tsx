@@ -34,7 +34,7 @@ export const SuperheroList: React.FC<SuperheroListProps> = (props) => {
         return (
             <>
                 <h1>You have no heroes created yet</h1>
-                <Link to="/createhero">Add new hero</Link>
+                <Link className='newhero' to="/createhero">Add new hero</Link>
             </>
         )
     }
