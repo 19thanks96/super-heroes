@@ -43,7 +43,7 @@ app.get('/superheroes', async (req, res) => {
 })
 
 app.get('/superheroes/:_id', async (req, res) => {
-    console.log('/superheroes/:_id')
+    console.log('GET /superheroes/:_id')
     const hero = await database.getHero(req.params._id)
     res.json(hero)
 })
@@ -51,8 +51,8 @@ app.get('/superheroes/:_id', async (req, res) => {
 app.put('/superheroes/:_id', upload.single('file'), updateHero)
 
 async function updateHero(req, res) {
-    console.log('/superheroes/:_id')
-    if(!req.body) return res.sendStatus(400);
+    console.log('PUT /superheroes/:_id')
+    if (!req.body) return res.sendStatus(400)
     const superHero = {
         nickname: req.body.nickname,
         real_name: req.body.real_name,
@@ -61,9 +61,16 @@ async function updateHero(req, res) {
         images: [req.file.filename.replace(/\\/g, '/')],
     }
     const user = await database.updateHero(superHero, req.params._id)
-    if(user) res.send(user);
-    else res.sendStatus(404);
+    if (user) res.send(user)
+    else res.sendStatus(404)
 }
+
+app.delete('/superheroes/:_id', async (req, res) => {
+    console.log('DELETE /superheroes/:_id')
+    const user = await database.deleteHero(req.params._id)
+    if (user) res.send(user)
+    else res.sendStatus(404)
+})
 
 async function run() {
     try {

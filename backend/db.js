@@ -36,22 +36,28 @@ async function createHero(user) {
 }
 
 async function updateHero(newHero, id) {
-    console.log(id)
-    const newid = new ObjectId(id);
+    const newid = new ObjectId(id)
     const result = await collection.findOneAndUpdate(
         { _id: newid },
-        { $set: newHero} ,
+        { $set: newHero },
         { returnDocument: 'after' }
     )
-    const user = result.value;
+    const user = result.value
     return user
 }
+
 async function getAllHeroes() {
     const result = await collection.find().toArray()
-
+    const user = result.value
     return result
 }
 
+async function deleteHero(id) {
+    const objectId = new ObjectId(id)
+    const result = await collection.findOneAndDelete({ _id: objectId })
+
+    return result
+}
 async function getHero(it) {
     const resultforOne = await collection.findOne({ _id: new ObjectId(it) })
 
@@ -65,4 +71,5 @@ module.exports = {
     getAllHeroes,
     mongoClienter,
     getHero,
+    deleteHero,
 }

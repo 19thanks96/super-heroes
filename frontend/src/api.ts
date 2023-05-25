@@ -49,3 +49,10 @@ export async function updateHero(hero: SuperHeroDTO) {
     const responseJson = await response.json()
     return responseJson
 }
+
+export async function deleteHero(_id?:string) {
+    const response = await fetch(url + '/superheroes/' + _id,{
+        method: 'delete'})
+    const responseJson = await response.json()
+    return responseJson
+}

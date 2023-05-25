@@ -2,11 +2,15 @@ import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { Routes, Route, useParams } from 'react-router-dom'
 import { SuperHeroForm } from './SuperHeroForm'
-import { fetchHero } from '../api'
+import { deleteHero, fetchHero } from '../api'
 import { SuperHero } from '../types'
+import { useNavigate } from 'react-router-dom'
 import { url } from '../api'
+import { setDefaultResultOrder } from 'dns'
+
 
 export const HeroPage = () => {
+    const navigate = useNavigate()
     const [edit, setEdit] = useState<boolean>(false)
     let { _id } = useParams()
     const [hero, setHero] = useState<SuperHero>()
@@ -24,6 +28,10 @@ export const HeroPage = () => {
     })
     function editSuperHero() {
         setEdit(true)
+    }
+    async function deleteSuperHero() {
+        await deleteHero(hero?._id)
+        navigate('/')
     }
     if(edit) {return <SuperHeroForm superheroes={hero}/>} 
     
@@ -44,6 +52,8 @@ export const HeroPage = () => {
             </div>
             <div className="img">{heroImages}</div>
             <button onClick={editSuperHero} type='button'>Edit</button>
+            <button onClick={deleteSuperHero} type='button'>Delete</button>
+
         </>
     )
 }
