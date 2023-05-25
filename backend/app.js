@@ -38,7 +38,8 @@ function createHero(req, res) {
 }
 app.get('/superheroes', async (req, res) => {
     console.log('GET /superheroes')
-    const heroes = await database.getAllHeroes()
+    const page = Number(req.query.page)
+    const heroes = await database.getAllHeroes(page)
     res.json(heroes)
 })
 

@@ -21,7 +21,7 @@ export async function createHero(hero: SuperHeroDTO) {
 }
 
 export async function fetchSuperHeroes() {
-    const response = await fetch(url + '/superheroes')
+    const response = await fetch(url + '/superheroes?page=' + 1)
     const responseJson = await response.json()
     return responseJson
 }

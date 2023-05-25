@@ -5,13 +5,13 @@ do CRUD operations of the superhero model
 ## Functional requirements:
 
 - [x] Create a superhero
-- [ ] Edit a superhero
-- [ ] Remove a superhero
+- [x] Edit a superhero
+- [x] Remove a superhero
 - [ ] When creating / editing we want to be able to assign and remove images from
 a superhero
-- [ ] List all the superheros, seeing only one image for each and it’s nickname,
-with pagination, showing 5 items at once
-- [ ] See the details of one particular superhero with all it’s information and images
+- [x] List all the superheros, seeing only one image for each and it’s nickname,
+- [ ] pagination, showing 5 items at once
+- [x] See the details of one particular superhero with all it’s information and images
 > Test for fronend: 
 > - [x] SuperheroList renders  "you have no heroes created yet" when no heroes pass
 > - [x] SuperheroList renders  "add new hero" button
@@ -37,6 +37,7 @@ you made (if any)
 > - React Router
 > - Prettier
 > - Nodemon
+> - MongoDb
 
 ## Live Demo
 
@@ -63,6 +64,7 @@ npm install
 npm start
 ```
 ### Backend:
+Install and run MongoDb on: `mongodb://127.0.0.1:27017`
 ```
 cd backend
 

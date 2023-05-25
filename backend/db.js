@@ -46,9 +46,9 @@ async function updateHero(newHero, id) {
     return user
 }
 
-async function getAllHeroes() {
-    const result = await collection.find().toArray()
-    const user = result.value
+async function getAllHeroes(page) {
+    const pageSize = 2
+    const result = await collection.find().skip((page-1)*pageSize).limit(pageSize).toArray()
     return result
 }
 
@@ -60,7 +60,6 @@ async function deleteHero(id) {
 }
 async function getHero(it) {
     const resultforOne = await collection.findOne({ _id: new ObjectId(it) })
-
     return resultforOne
 }
 //run().catch(console.error);
