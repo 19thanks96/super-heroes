@@ -8,7 +8,7 @@ import {
 import { SuperheroList } from '../components/SuperheroList'
 import { MemoryRouter, Router, Route, BrowserRouter } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
-import { SuperHeroForm } from '../components/CreateSuperHero'
+import { SuperHeroForm } from '../components/SuperHeroForm'
 
 const renderWithRouter = (
     ui: React.ReactElement<any, string | React.JSXElementConstructor<any>>,

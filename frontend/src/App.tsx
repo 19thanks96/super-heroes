@@ -4,7 +4,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { SuperheroList } from './components/SuperheroList'
 import Layout from './components/Layout'
-import { SuperHeroForm } from './components/CreateSuperHero'
+import { SuperHeroForm } from './components/SuperHeroForm'
 import { MainPage } from './components/MainPage'
 import { HeroPage } from './components/HeroPage'
 

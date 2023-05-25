@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import { Routes, Route, useParams } from 'react-router-dom'
-import { SuperHeroForm } from './CreateSuperHero'
+import { SuperHeroForm } from './SuperHeroForm'
 import { fetchHero } from '../api'
 import { SuperHero } from '../types'
 import { url } from '../api'

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createHero } from '../api'
+import { createHero, updateHero } from '../api'
 import { SuperHeroDTO } from '../types'
 import { useNavigate } from 'react-router-dom'
 import { SuperHero } from '../types'
@@ -9,27 +9,51 @@ export type SuperheroFromProps = {
 
 export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
     const [error, setError] = useState<string>('')
-    const [nickname, setNickname] = useState<string>(props?.superheroes?.nickname || '')
-    const [real_name, setReal_name] = useState<string>(props?.superheroes?.real_name || '')
-    const [origin_description, setOrigin_description] = useState<string>(props?.superheroes?.origin_description || '')
-    const [catch_phrase, setCatch_phrase] = useState<string>(props?.superheroes?.catch_phrase || '')
+    const [nickname, setNickname] = useState<string>(
+        props?.superheroes?.nickname || ''
+    )
+    const [real_name, setReal_name] = useState<string>(
+        props?.superheroes?.real_name || ''
+    )
+    const [origin_description, setOrigin_description] = useState<string>(
+        props?.superheroes?.origin_description || ''
+    )
+    const [catch_phrase, setCatch_phrase] = useState<string>(
+        props?.superheroes?.catch_phrase || ''
+    )
     const [images, setImages] = useState<SuperHeroDTO['images']>(null)
     const navigate = useNavigate()
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        if(!images || !catch_phrase || !origin_description || !real_name || !nickname) {
+        if (
+            !images ||
+            !catch_phrase ||
+            !origin_description ||
+            !real_name ||
+            !nickname
+        ) {
             setError('Please fill all fields')
             return
         }
         try {
-            await createHero({
-                nickname,
-                real_name,
-                origin_description,
-                catch_phrase,
-                images,
-            })
+            if (props.superheroes) {
+                await updateHero({
+                    ...props.superheroes,
+                    nickname,
+                    real_name,
+                    origin_description,
+                    catch_phrase,
+                    images,
+                })
+            } else
+                await createHero({
+                    nickname,
+                    real_name,
+                    origin_description,
+                    catch_phrase,
+                    images,
+                })
             navigate('/')
         } catch (error) {
             console.log(console.error(error))

@@ -1,9 +1,9 @@
-const { MongoClient, ObjectId } = require("mongodb");
+const { MongoClient, ObjectId } = require('mongodb')
 
 // Replace the uri string with your connection string.
-const uri = 'mongodb://127.0.0.1:27017';
-const mongoClienter = new MongoClient(uri);
-let collection;
+const uri = 'mongodb://127.0.0.1:27017'
+const mongoClienter = new MongoClient(uri)
+let collection
 
 /*async function run() {
     try {
@@ -23,34 +23,46 @@ let collection;
     }
 }*/
 async function connectToSuperHeroes() {
-    await mongoClienter.connect();
-        const db = mongoClienter.db("allSuperHeroes");
-        const collectionHero = db.collection("hero");
-        collection = collectionHero
-        return collectionHero
+    await mongoClienter.connect()
+    const db = mongoClienter.db('allSuperHeroes')
+    const collectionHero = db.collection('hero')
+    collection = collectionHero
+    return collectionHero
 }
-async function createHero( user) {
-    console.log(user)
-    const result = await collection.insertOne(user);
-    console.log(result)
+async function createHero(user) {
+    const result = await collection.insertOne(user)
+
     return result
 }
 
-async function updateHero( prev, newHero) {
-    const result = await collection.findOneAndUpdate(prev, {$set : newHero})
-    console.log(result)
-    return result
+async function updateHero(newHero, id) {
+    console.log(id)
+    const newid = new ObjectId(id);
+    const result = await collection.findOneAndUpdate(
+        { _id: newid },
+        { $set: newHero} ,
+        { returnDocument: 'after' }
+    )
+    const user = result.value;
+    return user
 }
 async function getAllHeroes() {
-    const result = await collection.find().toArray();
-    console.log(result);
+    const result = await collection.find().toArray()
+
     return result
 }
 
 async function getHero(it) {
-    const resultforOne = await collection.findOne({"_id" : new ObjectId(it)});
-    console.log(resultforOne , 'one');
+    const resultforOne = await collection.findOne({ _id: new ObjectId(it) })
+
     return resultforOne
 }
 //run().catch(console.error);
-module.exports = { connectToSuperHeroes, updateHero, createHero, getAllHeroes, mongoClienter, getHero}
+module.exports = {
+    connectToSuperHeroes,
+    updateHero,
+    createHero,
+    getAllHeroes,
+    mongoClienter,
+    getHero,
+}

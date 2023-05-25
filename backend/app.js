@@ -8,7 +8,6 @@ const database = require('./db')
 const app = express()
 const port = 4000
 
-
 app.use(express.static('uploads'))
 
 app.use(cors())
@@ -24,19 +23,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-const superheroes = []
+app.post('/superheroes', upload.single('file'), createHero)
 
-//app.post('/superheroes', (req, res) => {
-//    superheroes.push(req.body)
-//    console.log(superheroes)
-//    res.json(req.body)
-//})
-app.post('/superheroes', upload.single('file'), uploadFiles)
-
-function uploadFiles(req, res) {
-    
-    console.log(req.body)
-    console.log(req.file)
+function createHero(req, res) {
     const superHero = {
         nickname: req.body.nickname,
         real_name: req.body.real_name,
@@ -44,23 +33,37 @@ function uploadFiles(req, res) {
         catch_phrase: req.body.catch_phrase,
         images: [req.file.filename.replace(/\\/g, '/')],
     }
-    superheroes.push(superHero)
     database.createHero(superHero)
     res.json(superHero)
 }
 app.get('/superheroes', async (req, res) => {
     console.log('GET /superheroes')
-    const heroes =  await database.getAllHeroes()
+    const heroes = await database.getAllHeroes()
     res.json(heroes)
 })
 
 app.get('/superheroes/:_id', async (req, res) => {
-    console.log(req.params._id, 'req.params._id')
+    console.log('/superheroes/:_id')
     const hero = await database.getHero(req.params._id)
-    console.log(hero, 'hero')
-
     res.json(hero)
 })
+
+app.put('/superheroes/:_id', upload.single('file'), updateHero)
+
+async function updateHero(req, res) {
+    console.log('/superheroes/:_id')
+    if(!req.body) return res.sendStatus(400);
+    const superHero = {
+        nickname: req.body.nickname,
+        real_name: req.body.real_name,
+        origin_description: req.body.origin_description,
+        catch_phrase: req.body.catch_phrase,
+        images: [req.file.filename.replace(/\\/g, '/')],
+    }
+    const user = await database.updateHero(superHero, req.params._id)
+    if(user) res.send(user);
+    else res.sendStatus(404);
+}
 
 async function run() {
     try {
@@ -71,9 +74,11 @@ async function run() {
     } catch (err) {
         console.log(err)
     } finally {
-        
     }
 }
-run().catch(console.error);
+run().catch(console.error)
 module.exports = app
-process.on('SIGINT', async function() {await database.mongoClienter.close()})
+process.on('SIGINT', async function () {
+    await database.mongoClienter.close()
+    process.exit()
+})
