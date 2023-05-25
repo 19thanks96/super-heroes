@@ -4,7 +4,6 @@ import { fetchSuperHeroes } from '../api'
 import { SuperHeroDTO, SuperHeroArray } from '../types'
 import { SuperheroList } from './SuperheroList'
 
-
 export const MainPage = () => {
     const [superheroes, setSuperheroes] = useState<SuperHeroArray>([])
     useEffect(() => {

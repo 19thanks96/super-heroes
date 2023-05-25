@@ -4,7 +4,7 @@ export type SuperHeroDTO = {
     origin_description: string
     catch_phrase: string
     images: FileList | null
-    _id?: string 
+    _id?: string
 }
 
 export type SuperHero = {

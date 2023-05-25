@@ -26,7 +26,7 @@ export async function fetchSuperHeroes() {
     return responseJson
 }
 
-export async function fetchHero(_id?:string) {
+export async function fetchHero(_id?: string) {
     const response = await fetch(url + '/superheroes/' + _id)
     const responseJson = await response.json()
     return responseJson
@@ -50,9 +50,10 @@ export async function updateHero(hero: SuperHeroDTO) {
     return responseJson
 }
 
-export async function deleteHero(_id?:string) {
-    const response = await fetch(url + '/superheroes/' + _id,{
-        method: 'delete'})
+export async function deleteHero(_id?: string) {
+    const response = await fetch(url + '/superheroes/' + _id, {
+        method: 'delete',
+    })
     const responseJson = await response.json()
     return responseJson
 }

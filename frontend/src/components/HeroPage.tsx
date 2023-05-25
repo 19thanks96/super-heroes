@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import { url } from '../api'
 import { setDefaultResultOrder } from 'dns'
 
-
 export const HeroPage = () => {
     const navigate = useNavigate()
     const [edit, setEdit] = useState<boolean>(false)
@@ -29,12 +28,14 @@ export const HeroPage = () => {
     function editSuperHero() {
         setEdit(true)
     }
-    async function deleteSuperHero() {
+    async function handleDeleteButtonClick() {
         await deleteHero(hero?._id)
         navigate('/')
     }
-    if(edit) {return <SuperHeroForm superheroes={hero}/>} 
-    
+    if (edit) {
+        return <SuperHeroForm superheroes={hero} />
+    }
+
     return (
         <>
             {hero.nickname}
@@ -51,9 +52,12 @@ export const HeroPage = () => {
                 <p>{hero.catch_phrase}</p>
             </div>
             <div className="img">{heroImages}</div>
-            <button onClick={editSuperHero} type='button'>Edit</button>
-            <button onClick={deleteSuperHero} type='button'>Delete</button>
-
+            <button onClick={editSuperHero} type="button">
+                Edit
+            </button>
+            <button onClick={handleDeleteButtonClick} type="button">
+                Delete
+            </button>
         </>
     )
 }

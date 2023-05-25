@@ -23,11 +23,11 @@ test('renders  "you have no heroes created yet" when no heroes pass', () => {
 })
 
 test('renders  "add new hero" button', () => {
-  render(<SuperheroList superheroes={[]} />, { wrapper: BrowserRouter })
-  const superheroElement = screen.getByRole('link', {
-    name: /add new hero/i,
-})
-  expect(superheroElement).toBeInTheDocument()
+    render(<SuperheroList superheroes={[]} />, { wrapper: BrowserRouter })
+    const superheroElement = screen.getByRole('link', {
+        name: /add new hero/i,
+    })
+    expect(superheroElement).toBeInTheDocument()
 })
 
 test('renders `add new hero` button when no heroes pass', async () => {
@@ -39,4 +39,3 @@ test('renders `add new hero` button when no heroes pass', async () => {
     await user.click(superheroElement)
     expect(window.location.pathname).toEqual('/createhero')
 })
-
