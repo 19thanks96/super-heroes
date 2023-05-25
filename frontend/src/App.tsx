@@ -15,7 +15,7 @@ function App() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<MainPage />} />
                     <Route path="createhero" element={<SuperHeroForm />} />
-                    <Route path="hero/:nickname" element={<HeroPage />} />
+                    <Route path="hero/:_id" element={<HeroPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>

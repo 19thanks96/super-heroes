@@ -26,8 +26,8 @@ export async function fetchSuperHeroes() {
     return responseJson
 }
 
-export async function fetchHero(nickname?:string) {
-    const response = await fetch(url + '/superheroes/' + nickname)
+export async function fetchHero(_id?:string) {
+    const response = await fetch(url + '/superheroes/' + _id)
     const responseJson = await response.json()
     return responseJson
 }

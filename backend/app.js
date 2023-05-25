@@ -8,6 +8,7 @@ const database = require('./db')
 const app = express()
 const port = 4000
 
+
 app.use(express.static('uploads'))
 
 app.use(cors())
@@ -33,6 +34,7 @@ const superheroes = []
 app.post('/superheroes', upload.single('file'), uploadFiles)
 
 function uploadFiles(req, res) {
+    
     console.log(req.body)
     console.log(req.file)
     const superHero = {
@@ -40,30 +42,38 @@ function uploadFiles(req, res) {
         real_name: req.body.real_name,
         origin_description: req.body.origin_description,
         catch_phrase: req.body.catch_phrase,
-        images:[ req.file.filename.replace(/\\/g, "/")],
+        images: [req.file.filename.replace(/\\/g, '/')],
     }
     superheroes.push(superHero)
+    database.createHero(superHero)
     res.json(superHero)
 }
-app.get('/superheroes', (req, res) => {
-    res.json(superheroes)
+app.get('/superheroes', async (req, res) => {
+    console.log('GET /superheroes')
+    const heroes =  await database.getAllHeroes()
+    res.json(heroes)
 })
 
-if (process.env.NODE_ENV !== 'test') {
-    app.listen(port, () => console.log(`Listening on port ${port}`))
-}
-app.get('/superheroes/:nickname', (req, res) => {
-    console.log(req.params.nickname, 'req.params.nickname')
-    const hero = superheroes.find((e) => {
-        console.log(e.nickname)
-        return e.nickname === req.params.nickname
-    })
-    console.log(superheroes)
+app.get('/superheroes/:_id', async (req, res) => {
+    console.log(req.params._id, 'req.params._id')
+    const hero = await database.getHero(req.params._id)
     console.log(hero, 'hero')
 
     res.json(hero)
 })
 
-
-//searchhero
+async function run() {
+    try {
+        await database.connectToSuperHeroes()
+        if (process.env.NODE_ENV !== 'test') {
+            app.listen(port, () => console.log(`Listening on port ${port}`))
+        }
+    } catch (err) {
+        console.log(err)
+    } finally {
+        
+    }
+}
+run().catch(console.error);
 module.exports = app
+process.on('SIGINT', async function() {await database.mongoClienter.close()})

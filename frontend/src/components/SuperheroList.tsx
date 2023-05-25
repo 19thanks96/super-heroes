@@ -12,7 +12,7 @@ export type SuperheroListProps = {
 export const SuperheroList: React.FC<SuperheroListProps> = (props) => {
     const navigate = useNavigate()
     function showHero(hero:SuperHero) {
-        navigate("/hero/" + hero.nickname);
+        navigate("/hero/" + hero._id);
     }
     const superHeroElements = props.superheroes.map((hero, index) => {
         return (

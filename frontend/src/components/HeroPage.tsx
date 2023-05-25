@@ -8,13 +8,13 @@ import { url } from '../api'
 
 export const HeroPage = () => {
     const [edit, setEdit] = useState<boolean>(false)
-    let { nickname } = useParams()
+    let { _id } = useParams()
     const [hero, setHero] = useState<SuperHero>()
     useEffect(() => {
         setFetchedHero()
     }, [])
     async function setFetchedHero() {
-        setHero(await fetchHero(nickname))
+        setHero(await fetchHero(_id))
     }
     if (!hero) {
         return <></>
@@ -29,7 +29,7 @@ export const HeroPage = () => {
     
     return (
         <>
-            {nickname}
+            {hero.nickname}
             <div className="realname">
                 <p>Realname: </p>
                 <p>{hero.real_name}</p>

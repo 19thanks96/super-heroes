@@ -12,6 +12,7 @@ export type SuperHero = {
     origin_description: string
     catch_phrase: string
     images: string[]
+    _id: string
 }
 
 export type SuperHeroArray = Array<SuperHero>

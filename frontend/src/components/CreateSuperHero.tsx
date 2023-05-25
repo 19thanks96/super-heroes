@@ -8,6 +8,7 @@ export type SuperheroFromProps = {
 }
 
 export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
+    const [error, setError] = useState<string>('')
     const [nickname, setNickname] = useState<string>(props?.superheroes?.nickname || '')
     const [real_name, setReal_name] = useState<string>(props?.superheroes?.real_name || '')
     const [origin_description, setOrigin_description] = useState<string>(props?.superheroes?.origin_description || '')
@@ -17,6 +18,10 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
+        if(!images || !catch_phrase || !origin_description || !real_name || !nickname) {
+            setError('Please fill all fields')
+            return
+        }
         try {
             await createHero({
                 nickname,
@@ -89,7 +94,7 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
                         setImages(event.currentTarget.files)
                     }}
                 />
-                <button type="button">button</button>
+                {error}
                 <input type="submit" id="submit" value="submit" />
             </form>
         </>
