@@ -31,9 +31,9 @@ export const MainPage = () => {
     }
     return (
         <>
+            <div className='count'>Total Heroes: {totalCount}</div>
             <SuperheroList superheroes={superheroes} />
             <div className='pageButtons'>{pageButtons}</div>
-            <div className='count'>Total count: {Math.ceil(totalCount/pageSize)}</div>
         </>
     )
 }
