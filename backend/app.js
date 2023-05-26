@@ -40,7 +40,9 @@ app.get('/superheroes', async (req, res) => {
     console.log('GET /superheroes')
     const page = Number(req.query.page)
     const heroes = await database.getAllHeroes(page)
-    res.json(heroes)
+    const totalCount = 4 
+    const pageSize = 2 
+    res.json({heroes, totalCount, pageSize})
 })
 
 app.get('/superheroes/:_id', async (req, res) => {
@@ -84,7 +86,9 @@ async function run() {
     } finally {
     }
 }
+
 run().catch(console.error)
+
 module.exports = app
 process.on('SIGINT', async function () {
     await database.mongoClienter.close()
