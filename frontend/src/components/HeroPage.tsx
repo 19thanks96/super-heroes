@@ -50,10 +50,10 @@ export const HeroPage = () => {
                 <p>{hero.catch_phrase}</p>
             </div>
             <div className="img">{heroImages}</div>
-            <button onClick={editSuperHero} type="button">
+            <button onClick={editSuperHero} type="button" className='edit'>
                 Edit
             </button>
-            <button onClick={handleDeleteButtonClick} type="button">
+            <button onClick={handleDeleteButtonClick} type="button" className='delete'>
                 Delete
             </button>
         </>

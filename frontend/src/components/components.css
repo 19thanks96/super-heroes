@@ -116,3 +116,24 @@ form button {
 form {
     min-height: 80vh;
 }
+
+.edit,
+.delete{ 
+    margin: 20px 0; 
+    display: inline-block;
+    background-color: #34476e;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.edit{
+    margin-left: 10vw;
+    transform: translate(-50%, 0);
+}
+
+.delete{
+    margin-left: 70vw;
+    transform: translate(-50%, 0);
+}
