@@ -63,8 +63,12 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
             return
         }
     }
-    async function handleDeleteImgBtnClick(imglink: string) {
-        await deleteImg(imglink, props.hero)
+    async function handleDeleteImgBtnClick(imgToDelete: string) {
+        await deleteImg(imgToDelete, props.hero)
+        const updatedImg = imageLinks.filter((imageLink) => {
+            return imageLink !== imgToDelete
+        })
+        setImageLinks(updatedImg)
     }
     const imageElements = imageLinks.map((imageLink) => {
         return (
