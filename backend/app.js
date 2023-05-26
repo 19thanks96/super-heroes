@@ -31,6 +31,7 @@ function createHero(req, res) {
     const superHero = {
         nickname: req.body.nickname,
         real_name: req.body.real_name,
+        superpowers: req.body.superpowers,
         origin_description: req.body.origin_description,
         catch_phrase: req.body.catch_phrase,
         images: req.files.map((file) => file.filename),
@@ -61,6 +62,7 @@ async function updateHero(req, res) {
     const superHero = {
         nickname: req.body.nickname,
         real_name: req.body.real_name,
+        superpowers: req.body.superpowers,
         origin_description: req.body.origin_description,
         catch_phrase: req.body.catch_phrase,
     }

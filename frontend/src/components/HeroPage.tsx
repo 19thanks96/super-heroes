@@ -49,6 +49,10 @@ export const HeroPage = () => {
                 <p>Catch Phrase: </p>
                 <p>{hero.catch_phrase}</p>
             </div>
+            <div className="superpowers">
+                <p>Superpowers: </p>
+                <p>{hero.superpowers}</p>
+            </div>
             <div className="img">{heroImages}</div>
             <button onClick={editSuperHero} type="button" className="edit">
                 Edit

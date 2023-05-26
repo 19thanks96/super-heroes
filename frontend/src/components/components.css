@@ -158,8 +158,8 @@ form {
 
 .editpage__image button {
     position: absolute;
-    top: 1em;
-    right: 1em;
+    bottom: 1em;
+    left: 1em;
 }
 
 #deletebtn{

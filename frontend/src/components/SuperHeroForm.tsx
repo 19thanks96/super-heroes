@@ -18,6 +18,9 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
     const [origin_description, setOrigin_description] = useState<string>(
         props?.hero?.origin_description || ''
     )
+    const [superpowers, setSuperpowers] = useState<string>(
+        props?.hero?.superpowers || ''
+    )
     const [catch_phrase, setCatch_phrase] = useState<string>(
         props?.hero?.catch_phrase || ''
     )
@@ -34,6 +37,7 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
             !catch_phrase ||
             !origin_description ||
             !real_name ||
+            !superpowers ||
             !nickname
         ) {
             setError('Please fill all fields')
@@ -47,6 +51,7 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
                     real_name,
                     origin_description,
                     catch_phrase,
+                    superpowers,
                     images: imageFiles,
                 })
             } else
@@ -55,6 +60,7 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
                     real_name,
                     origin_description,
                     catch_phrase,
+                    superpowers,
                     images: imageFiles,
                 })
             navigate('/')
@@ -74,7 +80,8 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
         return (
             <div key={imageLink} className="editpage__image">
                 <img src={url + '/' + imageLink}></img>
-                <button id='deletebtn'
+                <button
+                    id="deletebtn"
                     onClick={() => {
                         handleDeleteImgBtnClick(imageLink)
                     }}
@@ -118,6 +125,17 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
                     value={origin_description}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setOrigin_description(event?.target.value)
+                    }}
+                />
+
+                <label htmlFor="superpowers">Superpowers</label>
+                <input
+                    name="superpowers"
+                    id="superpowers"
+                    type="text"
+                    value={superpowers}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setSuperpowers(event?.target.value)
                     }}
                 />
 

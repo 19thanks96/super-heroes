@@ -12,6 +12,7 @@ export async function createHero(hero: SuperHeroDTO) {
     }
     data.append('nickname', hero.nickname)
     data.append('real_name', hero.real_name)
+    data.append('superpowers',  hero.superpowers)
     data.append('origin_description', hero.origin_description)
     data.append('catch_phrase', hero.catch_phrase)
     const response = await fetch(url + '/superheroes', {
@@ -43,6 +44,7 @@ export async function updateHero(hero: SuperHeroDTO) {
         }
     }
     data.append('nickname', hero.nickname)
+    data.append('superpowers',  hero.superpowers)
     data.append('real_name', hero.real_name)
     data.append('origin_description', hero.origin_description)
     data.append('catch_phrase', hero.catch_phrase)

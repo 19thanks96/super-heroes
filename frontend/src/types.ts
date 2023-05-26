@@ -3,6 +3,7 @@ export type SuperHeroDTO = {
     real_name: string
     origin_description: string
     catch_phrase: string
+    superpowers: string
     images: FileList | null
     _id?: string
 }
@@ -12,6 +13,7 @@ export type SuperHero = {
     real_name: string
     origin_description: string
     catch_phrase: string
+    superpowers: string
     images: string[]
     _id: string
 }
