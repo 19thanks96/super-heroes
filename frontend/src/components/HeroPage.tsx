@@ -1,12 +1,10 @@
-import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { Routes, Route, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { SuperHeroForm } from './SuperHeroForm'
 import { deleteHero, fetchHero } from '../api'
 import { SuperHero } from '../types'
 import { useNavigate } from 'react-router-dom'
 import { url } from '../api'
-import { setDefaultResultOrder } from 'dns'
 
 export const HeroPage = () => {
     const navigate = useNavigate()

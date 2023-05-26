@@ -63,7 +63,7 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
 
     return (
         <>
-            <h1 className="creatingHero">Create your Superhero</h1>
+            
             <form onSubmit={handleSubmit}>
                 <label htmlFor="nickname">Nickname</label>
                 <input

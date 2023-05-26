@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { fetchSuperHeroes } from '../api'
-import { SuperHeroDTO, SuperHeroArray } from '../types'
+import {  SuperHeroArray } from '../types'
 import { SuperheroList } from './SuperheroList'
 
 export const MainPage = () => {

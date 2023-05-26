@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { SuperHero } from '../types'
-import { fetchSuperHeroes, url } from '../api'
+import {  url } from '../api'
 import './components.css'
 import { useNavigate } from 'react-router-dom'
 export type SuperheroListProps = {
