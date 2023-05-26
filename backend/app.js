@@ -52,7 +52,7 @@ app.get('/superheroes/:_id', async (req, res) => {
     res.json(hero)
 })
 
-app.put('/superheroes/:_id', upload.array('files'), updateHero)
+app.put('/superheroes/:_id', upload.any('files'), updateHero)
 
 async function updateHero(req, res) {
     console.log('PUT /superheroes/:_id')
@@ -63,10 +63,11 @@ async function updateHero(req, res) {
         origin_description: req.body.origin_description,
         catch_phrase: req.body.catch_phrase,
     }
+    let images = [];
     if (req.files) {
-        superHero.images = req.files.map((file) => file.filename)
+        images = req.files.map((file) => file.filename)
     }
-    const hero = await database.updateHero(superHero, req.params._id)
+    const hero = await database.updateHero(superHero, req.params._id, images)
     if (hero) res.send(hero)
     else res.sendStatus(404)
 }

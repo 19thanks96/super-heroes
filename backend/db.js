@@ -35,16 +35,18 @@ async function createHero(hero) {
     return result
 }
 
-async function updateHero(newHero, id) {
+async function updateHero(newHero, id, images) {
     const newid = new ObjectId(id)
+    const hero = await collection.findOne({ _id: newid })
+    newHero.images = hero.images.concat(images)
     const result = await collection.findOneAndUpdate(
         { _id: newid },
         { $set: newHero },
         { returnDocument: 'after' }
-    )
-    const hero = result.value
-    return hero
+    ) 
+    return result.value
 }
+
 
 const pageSize = 5
 async function getAllHeroes(page) {

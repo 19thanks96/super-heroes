@@ -52,7 +52,6 @@ p {
 }
 
 .img {
-    display: flex;
     justify-content: center; /* horizontally center */
     align-items: center;
 }
