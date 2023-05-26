@@ -142,9 +142,9 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
                         setImageFiles(event.currentTarget.files)
                     }}
                 />
-                <h2> Uploaded Images</h2>
+                <h2 className='error'>{error}</h2>
+                <h2 className='upload'> Uploaded Images</h2>
                 <div>{imageElements}</div>
-                {error}
                 <input type="submit" id="submit" value="submit" />
             </form>
         </>

@@ -79,6 +79,7 @@ form button {
 label {
     padding: 20px;
     font-size: 20px;
+    color: white;
 }
 
 #submit {
@@ -140,4 +141,12 @@ form {
 .count,
 .pageButtons{
     text-align: center;
+}
+
+.error{
+    color: red;
+}
+
+.upload{
+    color: white;
 }
