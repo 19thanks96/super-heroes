@@ -74,13 +74,13 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
         return (
             <div key={imageLink} className="editpage__image">
                 <img src={url + '/' + imageLink}></img>
-                <button
+                <button id='deletebtn'
                     onClick={() => {
                         handleDeleteImgBtnClick(imageLink)
                     }}
                     type="button"
                 >
-                    Delete{' '}
+                    Delete
                 </button>
             </div>
         )
@@ -142,8 +142,8 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
                         setImageFiles(event.currentTarget.files)
                     }}
                 />
-                <h2 className='error'>{error}</h2>
-                <h2 className='upload'> Uploaded Images</h2>
+                <h2 className="error">{error}</h2>
+                <h2 className="upload"> Uploaded Images</h2>
                 <div>{imageElements}</div>
                 <input type="submit" id="submit" value="submit" />
             </form>

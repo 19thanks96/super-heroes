@@ -150,3 +150,20 @@ form {
 .upload{
     color: white;
 }
+
+.editpage__image{
+    position: relative;
+    margin: 0 0 5px 0;
+}
+
+.editpage__image button {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+#deletebtn{
+    background: red;
+    width: initial;
+    border-radius: 10px;
+}
