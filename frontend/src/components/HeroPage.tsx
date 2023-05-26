@@ -31,7 +31,7 @@ export const HeroPage = () => {
         navigate('/')
     }
     if (edit) {
-        return <SuperHeroForm superheroes={hero} />
+        return <SuperHeroForm hero={hero} />
     }
 
     return (
@@ -50,10 +50,14 @@ export const HeroPage = () => {
                 <p>{hero.catch_phrase}</p>
             </div>
             <div className="img">{heroImages}</div>
-            <button onClick={editSuperHero} type="button" className='edit'>
+            <button onClick={editSuperHero} type="button" className="edit">
                 Edit
             </button>
-            <button onClick={handleDeleteButtonClick} type="button" className='delete'>
+            <button
+                onClick={handleDeleteButtonClick}
+                type="button"
+                className="delete"
+            >
                 Delete
             </button>
         </>

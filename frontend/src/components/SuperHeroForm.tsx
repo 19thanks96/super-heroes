@@ -4,26 +4,26 @@ import { SuperHeroDTO } from '../types'
 import { useNavigate } from 'react-router-dom'
 import { SuperHero } from '../types'
 export type SuperheroFromProps = {
-    superheroes?: SuperHero
+    hero?: SuperHero
 }
 
 export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
     const [error, setError] = useState<string>('')
     const [nickname, setNickname] = useState<string>(
-        props?.superheroes?.nickname || ''
+        props?.hero?.nickname || ''
     )
     const [real_name, setReal_name] = useState<string>(
-        props?.superheroes?.real_name || ''
+        props?.hero?.real_name || ''
     )
     const [origin_description, setOrigin_description] = useState<string>(
-        props?.superheroes?.origin_description || ''
+        props?.hero?.origin_description || ''
     )
     const [catch_phrase, setCatch_phrase] = useState<string>(
-        props?.superheroes?.catch_phrase || ''
+        props?.hero?.catch_phrase || ''
     )
     const [imageFiles, setImageFiles] = useState<SuperHeroDTO['images']>(null)
     const [imageLinks, setImageLinks] = useState<SuperHero['images']>(
-        props?.superheroes?.images || []
+        props?.hero?.images || []
     )
     const navigate = useNavigate()
 
@@ -40,9 +40,9 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
             return
         }
         try {
-            if (props.superheroes) {
+            if (props.hero) {
                 await updateHero({
-                    ...props.superheroes,
+                    ...props.hero,
                     nickname,
                     real_name,
                     origin_description,
@@ -63,11 +63,23 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
             return
         }
     }
-    async function handleDeleteImgBtnClick(imglink:string) {
-        await deleteImg(imglink, props.superheroes)
+    async function handleDeleteImgBtnClick(imglink: string) {
+        await deleteImg(imglink, props.hero)
     }
     const imageElements = imageLinks.map((imageLink) => {
-        return <div key={imageLink} className='editpage__image'><img src={url + '/' + imageLink}></img><button onClick={() => {handleDeleteImgBtnClick(imageLink)}} type='button'>Delete </button></div>
+        return (
+            <div key={imageLink} className="editpage__image">
+                <img src={url + '/' + imageLink}></img>
+                <button
+                    onClick={() => {
+                        handleDeleteImgBtnClick(imageLink)
+                    }}
+                    type="button"
+                >
+                    Delete{' '}
+                </button>
+            </div>
+        )
     })
     return (
         <>
