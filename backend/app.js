@@ -40,7 +40,7 @@ app.get('/superheroes', async (req, res) => {
     console.log('GET /superheroes')
     const page = Number(req.query.page)
     const heroes = await database.getAllHeroes(page)
-    const totalCount = 4 
+    const totalCount = await database.getHeroesCount()
     const pageSize = 2 
     res.json({heroes, totalCount, pageSize})
 })

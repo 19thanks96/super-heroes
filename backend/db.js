@@ -62,6 +62,12 @@ async function getHero(it) {
     const resultforOne = await collection.findOne({ _id: new ObjectId(it) })
     return resultforOne
 }
+
+async function getHeroesCount() {
+    const count = await collection.count()
+    console.log(count)
+    return count
+}
 //run().catch(console.error);
 module.exports = {
     connectToSuperHeroes,
@@ -71,4 +77,5 @@ module.exports = {
     mongoClienter,
     getHero,
     deleteHero,
+    getHeroesCount,
 }
