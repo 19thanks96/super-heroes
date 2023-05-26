@@ -7,10 +7,10 @@ do CRUD operations of the superhero model
 - [x] Create a superhero
 - [x] Edit a superhero
 - [x] Remove a superhero
-- [ ] When creating / editing we want to be able to assign and remove images from
+- [x] When creating / editing we want to be able to assign and remove images from
 a superhero
 - [x] List all the superheros, seeing only one image for each and it’s nickname,
-- [ ] pagination, showing 5 items at once
+- [x] pagination, showing 5 items at once
 - [x] See the details of one particular superhero with all it’s information and images
 > Test for fronend: 
 > - [x] SuperheroList renders  "you have no heroes created yet" when no heroes pass

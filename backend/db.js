@@ -1,4 +1,5 @@
 const { MongoClient, ObjectId } = require('mongodb')
+const fs = require('fs/promises')
 
 // Replace the uri string with your connection string.
 const uri = 'mongodb://127.0.0.1:27017'
@@ -24,7 +25,7 @@ let collection
 }*/
 async function connectToSuperHeroes() {
     await mongoClienter.connect()
-    const db = mongoClienter.db('allSuperHeroes')
+    const db = mongoClienter.db('SuperHeroesdb')
     const collectionHero = db.collection('hero')
     collection = collectionHero
     return collectionHero
@@ -56,6 +57,10 @@ async function getAllHeroes(page) {
 
 async function deleteHero(id) {
     const objectId = new ObjectId(id)
+    const hero = await collection.findOne({ _id: objectId })
+    for (const img of hero.images) {
+        await deleteImgFile(img)
+    }
     const result = await collection.findOneAndDelete({ _id: objectId })
     return result
 }
@@ -70,8 +75,14 @@ async function deleteHeroImg(id, fileName) {
         { _id: newid },
         { $set: {images: newImages} },
         { returnDocument: 'after' }
-    )
-    return result.value
+        )
+        await deleteImgFile(fileName)
+        return result.value
+}
+
+async function deleteImgFile(fileName) {
+    console.log('Deleting file: ',fileName)
+    return await fs.unlink('./uploads/' + fileName)
 }
 
 async function getHero(it) {

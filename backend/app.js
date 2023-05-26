@@ -2,9 +2,10 @@ const express = require('express')
 const multer = require('multer')
 var bodyParser = require('body-parser')
 var cors = require('cors')
-const fs = require('fs')
+const fs = require('fs/promises')
 const path = require('path')
 const database = require('./db')
+const { existsSync } = require('fs')
 const app = express()
 const port = 4000
 
@@ -63,7 +64,7 @@ async function updateHero(req, res) {
         origin_description: req.body.origin_description,
         catch_phrase: req.body.catch_phrase,
     }
-    let images = [];
+    let images = []
     if (req.files) {
         images = req.files.map((file) => file.filename)
     }
@@ -89,8 +90,18 @@ app.delete('/superheroes/:_id/image/:fileName', async (req, res) => {
     else res.sendStatus(404)
 })
 
+async function createDirectory() {
+    try {
+        await fs.mkdir('uploads')
+        console.log('uploads directory created')
+    } catch {
+        console.log('uploads directory exist')
+    }
+}
+
 async function run() {
     try {
+        await createDirectory()
         await database.connectToSuperHeroes()
         if (process.env.NODE_ENV !== 'test') {
             app.listen(port, () => console.log(`Listening on port ${port}`))
