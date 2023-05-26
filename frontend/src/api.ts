@@ -1,5 +1,5 @@
 import { stringify } from 'querystring'
-import { SuperHeroDTO } from './types'
+import { SuperHeroDTO, SuperHero } from './types'
 
 export const url = 'http://localhost:4000'
 export async function createHero(hero: SuperHeroDTO) {
@@ -51,6 +51,14 @@ export async function updateHero(hero: SuperHeroDTO) {
 
 export async function deleteHero(_id?: string) {
     const response = await fetch(url + '/superheroes/' + _id, {
+        method: 'delete',
+    })
+    const responseJson = await response.json()
+    return responseJson
+}
+
+export async function deleteImg(imglink:string, hero:SuperHero | undefined) {
+    const response = await fetch(url + '/superheroes/' + hero?._id + '/image/' + imglink, {
         method: 'delete',
     })
     const responseJson = await response.json()

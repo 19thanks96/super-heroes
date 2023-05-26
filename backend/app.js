@@ -75,6 +75,13 @@ app.delete('/superheroes/:_id', async (req, res) => {
     else res.sendStatus(404)
 })
 
+app.delete('/superheroes/:_id/image/:fileName', async (req, res) => {
+    console.log('DELETE /superheroes/:_id/image/:fileName')
+    const user = await database.deleteHeroImg(req.params._id, req.params.fileName)
+    if (user) res.send(user)
+    else res.sendStatus(404)
+})
+
 async function run() {
     try {
         await database.connectToSuperHeroes()

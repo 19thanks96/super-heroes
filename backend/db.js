@@ -55,9 +55,24 @@ async function getAllHeroes(page) {
 async function deleteHero(id) {
     const objectId = new ObjectId(id)
     const result = await collection.findOneAndDelete({ _id: objectId })
-
     return result
 }
+
+async function deleteHeroImg(id, fileName) {
+    const newid = new ObjectId(id)
+    const hero = await collection.findOne({ _id: newid })
+    const newImages = hero.images.filter((img) => {
+        return img !== fileName
+    })
+    const result = await collection.findOneAndUpdate(
+        { _id: newid },
+        { $set: {images: newImages} },
+        { returnDocument: 'after' }
+    )
+    const user = result.value
+    return user
+}
+
 async function getHero(it) {
     const resultforOne = await collection.findOne({ _id: new ObjectId(it) })
     return resultforOne
@@ -78,4 +93,5 @@ module.exports = {
     getHero,
     deleteHero,
     getHeroesCount,
+    deleteHeroImg
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createHero, updateHero, url } from '../api'
+import { createHero, updateHero, url, deleteImg } from '../api'
 import { SuperHeroDTO } from '../types'
 import { useNavigate } from 'react-router-dom'
 import { SuperHero } from '../types'
@@ -63,8 +63,11 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
             return
         }
     }
+    async function handleDeleteImgBtnClick(imglink:string) {
+        await deleteImg(imglink, props.superheroes)
+    }
     const imageElements = imageLinks.map((imageLink) => {
-        return <img src={url + '/' + imageLink}></img>
+        return <div className='editpage__image'><img src={url + '/' + imageLink}></img><button onClick={() => {handleDeleteImgBtnClick(imageLink)}} type='button'>Delete </button></div>
     })
     return (
         <>
