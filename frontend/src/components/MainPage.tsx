@@ -26,7 +26,7 @@ export const MainPage = () => {
     
     for (let i = 0; i < numPages; i++) {
         const pageNumber = i + 1
-        const button = <button type='button' onClick={() => {goToPage(pageNumber)}}>{pageNumber}</button>
+        const button = <button type='button' key={pageNumber} onClick={() => {goToPage(pageNumber)}}>{pageNumber}</button>
         pageButtons.push(button)
     }
     return (

@@ -67,7 +67,7 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
         await deleteImg(imglink, props.superheroes)
     }
     const imageElements = imageLinks.map((imageLink) => {
-        return <div className='editpage__image'><img src={url + '/' + imageLink}></img><button onClick={() => {handleDeleteImgBtnClick(imageLink)}} type='button'>Delete </button></div>
+        return <div key={imageLink} className='editpage__image'><img src={url + '/' + imageLink}></img><button onClick={() => {handleDeleteImgBtnClick(imageLink)}} type='button'>Delete </button></div>
     })
     return (
         <>

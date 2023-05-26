@@ -17,7 +17,7 @@ export const SuperheroList: React.FC<SuperheroListProps> = (props) => {
         return (
             <div
                 className="hero"
-                key={hero.nickname + index}
+                key={hero._id}
                 onClick={() => {
                     showHero(hero)
                 }}

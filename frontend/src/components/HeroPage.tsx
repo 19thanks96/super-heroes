@@ -20,8 +20,8 @@ export const HeroPage = () => {
     if (!hero) {
         return <></>
     }
-    const heroImages = hero.images.map((element) => {
-        return <img src={url + '/' + element} />
+    const heroImages = hero.images.map((imglink) => {
+        return <img key={imglink} src={url + '/' + imglink} />
     })
     function editSuperHero() {
         setEdit(true)
