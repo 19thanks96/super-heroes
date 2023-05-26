@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createHero, updateHero } from '../api'
+import { createHero, updateHero, url } from '../api'
 import { SuperHeroDTO } from '../types'
 import { useNavigate } from 'react-router-dom'
 import { SuperHero } from '../types'
@@ -21,13 +21,16 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
     const [catch_phrase, setCatch_phrase] = useState<string>(
         props?.superheroes?.catch_phrase || ''
     )
-    const [images, setImages] = useState<SuperHeroDTO['images']>(null)
+    const [imageFiles, setImageFiles] = useState<SuperHeroDTO['images']>(null)
+    const [imageLinks, setImageLinks] = useState<SuperHero['images']>(
+        props?.superheroes?.images || []
+    )
     const navigate = useNavigate()
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         if (
-            !images ||
+            !(imageFiles || imageLinks.length) ||
             !catch_phrase ||
             !origin_description ||
             !real_name ||
@@ -44,7 +47,7 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
                     real_name,
                     origin_description,
                     catch_phrase,
-                    images,
+                    images: imageFiles,
                 })
             } else
                 await createHero({
@@ -52,7 +55,7 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
                     real_name,
                     origin_description,
                     catch_phrase,
-                    images,
+                    images: imageFiles,
                 })
             navigate('/')
         } catch (error) {
@@ -60,10 +63,11 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
             return
         }
     }
-
+    const imageElements = imageLinks.map((imageLink) => {
+        return <img src={url + '/' + imageLink}></img>
+    })
     return (
         <>
-            
             <form onSubmit={handleSubmit}>
                 <label htmlFor="nickname">Nickname</label>
                 <input
@@ -115,9 +119,11 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
                     id="images"
                     type="file"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        setImages(event.currentTarget.files)
+                        setImageFiles(event.currentTarget.files)
                     }}
                 />
+                <h2> Uploaded Images</h2>
+                <div>{imageElements}</div>
                 {error}
                 <input type="submit" id="submit" value="submit" />
             </form>

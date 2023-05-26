@@ -61,8 +61,8 @@ async function updateHero(req, res) {
         real_name: req.body.real_name,
         origin_description: req.body.origin_description,
         catch_phrase: req.body.catch_phrase,
-        images: [req.file.filename.replace(/\\/g, '/')],
     }
+    if(req.file){superHero.images = [req.file.filename.replace(/\\/g, '/')]}
     const user = await database.updateHero(superHero, req.params._id)
     if (user) res.send(user)
     else res.sendStatus(404)
