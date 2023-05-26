@@ -46,8 +46,8 @@ async function updateHero(newHero, id) {
     return user
 }
 
+const pageSize = 5
 async function getAllHeroes(page) {
-    const pageSize = 2
     const result = await collection.find().skip((page-1)*pageSize).limit(pageSize).toArray()
     return result
 }
@@ -93,5 +93,6 @@ module.exports = {
     getHero,
     deleteHero,
     getHeroesCount,
-    deleteHeroImg
+    deleteHeroImg,
+    pageSize
 }

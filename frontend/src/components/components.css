@@ -137,3 +137,8 @@ form {
     margin-left: 70vw;
     transform: translate(-50%, 0);
 }
+
+.count,
+.pageButtons{
+    text-align: center;
+}
