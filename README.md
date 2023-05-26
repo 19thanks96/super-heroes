@@ -4,8 +4,8 @@ do CRUD operations of the superhero model
 
 ## Live Demo
 
-### Update Hero image and superpowers
-![live promo](./frontend/src/gifs/add_img%2BchangeInput.gif)
+### Pagination and home button
+![promo](./frontend/src/gifs/paginationreturnHome.gif)
 
 ### Delete Hero
 ![delete_superman.gif](./frontend/src/gifs/delete_superman.gif)
@@ -13,8 +13,9 @@ do CRUD operations of the superhero model
 ### Delete picture of a superhero
 ![promo](./frontend/src/gifs/delete_useless.img.gif)
 
-### Pagination and home button
-![promo](./frontend/src/gifs/paginationreturnHome.gif)
+### Update Hero image and superpowers
+![live promo](./frontend/src/gifs/add_img%2BchangeInput.gif)
+
 ## Functional requirements:
 
 - [x] Create a superhero
