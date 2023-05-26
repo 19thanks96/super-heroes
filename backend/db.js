@@ -13,7 +13,7 @@ let collection
         //const results = await collection.find({name: "Tom"}).toArray();
         //console.log(results);
 
-        await createHero( user)
+        await createHero( hero)
         //await updateHero( prev, update)
         await getAllHeroes()
     }catch(err) {
@@ -29,8 +29,8 @@ async function connectToSuperHeroes() {
     collection = collectionHero
     return collectionHero
 }
-async function createHero(user) {
-    const result = await collection.insertOne(user)
+async function createHero(hero) {
+    const result = await collection.insertOne(hero)
 
     return result
 }
@@ -42,8 +42,8 @@ async function updateHero(newHero, id) {
         { $set: newHero },
         { returnDocument: 'after' }
     )
-    const user = result.value
-    return user
+    const hero = result.value
+    return hero
 }
 
 const pageSize = 5
@@ -69,8 +69,7 @@ async function deleteHeroImg(id, fileName) {
         { $set: {images: newImages} },
         { returnDocument: 'after' }
     )
-    const user = result.value
-    return user
+    return result.value
 }
 
 async function getHero(it) {

@@ -63,22 +63,22 @@ async function updateHero(req, res) {
         catch_phrase: req.body.catch_phrase,
     }
     if(req.file){superHero.images = [req.file.filename.replace(/\\/g, '/')]}
-    const user = await database.updateHero(superHero, req.params._id)
-    if (user) res.send(user)
+    const hero = await database.updateHero(superHero, req.params._id)
+    if (hero) res.send(hero)
     else res.sendStatus(404)
 }
 
 app.delete('/superheroes/:_id', async (req, res) => {
     console.log('DELETE /superheroes/:_id')
-    const user = await database.deleteHero(req.params._id)
-    if (user) res.send(user)
+    const hero = await database.deleteHero(req.params._id)
+    if (hero) res.send(hero)
     else res.sendStatus(404)
 })
 
 app.delete('/superheroes/:_id/image/:fileName', async (req, res) => {
     console.log('DELETE /superheroes/:_id/image/:fileName')
-    const user = await database.deleteHeroImg(req.params._id, req.params.fileName)
-    if (user) res.send(user)
+    const hero = await database.deleteHeroImg(req.params._id, req.params.fileName)
+    if (hero) res.send(hero)
     else res.sendStatus(404)
 })
 
