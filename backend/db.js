@@ -82,6 +82,7 @@ async function getHeroesCount() {
     console.log(count)
     return count
 }
+
 //run().catch(console.error);
 module.exports = {
     connectToSuperHeroes,

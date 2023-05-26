@@ -4,8 +4,11 @@ import { SuperHeroDTO, SuperHero } from './types'
 export const url = 'http://localhost:4000'
 export async function createHero(hero: SuperHeroDTO) {
     const data = new FormData()
-    if (hero.images) {
-        data.append('file', hero.images[0])
+    if (hero.images?.length) {
+        for (let i = 0; i < hero.images.length; i++) {
+            data.append('files[]', hero.images[i])
+            console.log(hero.images[i])
+        }
     }
     data.append('nickname', hero.nickname)
     data.append('real_name', hero.real_name)
@@ -34,7 +37,10 @@ export async function fetchHero(_id?: string) {
 export async function updateHero(hero: SuperHeroDTO) {
     const data = new FormData()
     if (hero.images?.length) {
-        data.append('file', hero.images[0])
+        for (let i = 0; i < hero.images.length; i++) {
+            data.append('files[]', hero.images[i])
+            console.log(hero.images[i])
+        }
     }
     data.append('nickname', hero.nickname)
     data.append('real_name', hero.real_name)

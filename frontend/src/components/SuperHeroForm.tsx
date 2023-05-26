@@ -130,8 +130,9 @@ export const SuperHeroForm: React.FC<SuperheroFromProps> = (props) => {
 
                 <label htmlFor="img">Add your Image</label>
                 <input
-                    name="images"
+                    name="files"
                     id="images"
+                    multiple
                     type="file"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setImageFiles(event.currentTarget.files)

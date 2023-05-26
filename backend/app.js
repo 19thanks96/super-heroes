@@ -23,15 +23,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-app.post('/superheroes', upload.single('file'), createHero)
+app.post('/superheroes', upload.any('files'), createHero)
 
 function createHero(req, res) {
+    console.log(req.files)
     const superHero = {
         nickname: req.body.nickname,
         real_name: req.body.real_name,
         origin_description: req.body.origin_description,
         catch_phrase: req.body.catch_phrase,
-        images: [req.file.filename.replace(/\\/g, '/')],
+        images: req.files.map((file) => file.filename),
     }
     database.createHero(superHero)
     res.json(superHero)
@@ -42,7 +43,7 @@ app.get('/superheroes', async (req, res) => {
     const heroes = await database.getAllHeroes(page)
     const totalCount = await database.getHeroesCount()
     const pageSize = database.pageSize
-    res.json({heroes, totalCount, pageSize})
+    res.json({ heroes, totalCount, pageSize })
 })
 
 app.get('/superheroes/:_id', async (req, res) => {
@@ -51,7 +52,7 @@ app.get('/superheroes/:_id', async (req, res) => {
     res.json(hero)
 })
 
-app.put('/superheroes/:_id', upload.single('file'), updateHero)
+app.put('/superheroes/:_id', upload.array('files'), updateHero)
 
 async function updateHero(req, res) {
     console.log('PUT /superheroes/:_id')
@@ -62,7 +63,9 @@ async function updateHero(req, res) {
         origin_description: req.body.origin_description,
         catch_phrase: req.body.catch_phrase,
     }
-    if(req.file){superHero.images = [req.file.filename.replace(/\\/g, '/')]}
+    if (req.files) {
+        superHero.images = req.files.map((file) => file.filename)
+    }
     const hero = await database.updateHero(superHero, req.params._id)
     if (hero) res.send(hero)
     else res.sendStatus(404)
@@ -77,7 +80,10 @@ app.delete('/superheroes/:_id', async (req, res) => {
 
 app.delete('/superheroes/:_id/image/:fileName', async (req, res) => {
     console.log('DELETE /superheroes/:_id/image/:fileName')
-    const hero = await database.deleteHeroImg(req.params._id, req.params.fileName)
+    const hero = await database.deleteHeroImg(
+        req.params._id,
+        req.params.fileName
+    )
     if (hero) res.send(hero)
     else res.sendStatus(404)
 })
